@@ -1,21 +1,51 @@
 ﻿using ContractMonthlyClaimSystem.Controllers.Data;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
-public class CoordinatorController : Controller
+namespace ContractMonthlyClaimSystem.Controllers
 {
-    private readonly ApplicationDbContext _context;
-
-    public CoordinatorController(ApplicationDbContext context)
+    public class CoordinatorController : Controller
     {
-        _context = context;
-    }
+        private readonly ApplicationDbContext _context;
 
-    public IActionResult Index()
-    {
-        // Fetch coordinators or perform other actions
+        // Constructor to inject the DbContext
+        public CoordinatorController(ApplicationDbContext context)
+        {
+            _context = context;
+        }
 
-        var coordinators = _context.ProgrammeCoordinators.ToList();
-        return View(coordinators);
+        // 1. Define the 'ApproveClaims' action to show pending claims
+        public IActionResult ApproveClaims()
+        {
+            var pendingClaims = _context.Claims
+                .Where(c => c.Status == "Pending")  // Fetch claims that are pending approval
+                .ToList();
+
+            return View(pendingClaims);  // Pass the list of pending claims to the view
+        }
+
+        // 2. Define the 'Approve' action to approve a claim
+        public IActionResult Approve(int id)
+        {
+            var claim = _context.Claims.Find(id);  // Find the claim by its ID
+            if (claim != null)
+            {
+                claim.Status = "Approved";  // Update the claim's status to 'Approved'
+                _context.SaveChanges();  // Save changes to the database
+            }
+            return RedirectToAction("ApproveClaims");  // Redirect to the list of claims
+        }
+
+        // 3. Define the 'Reject' action to reject a claim
+        public IActionResult Reject(int id)
+        {
+            var claim = _context.Claims.Find(id);  // Find the claim by its ID
+            if (claim != null)
+            {
+                claim.Status = "Rejected";  // Update the claim's status to 'Rejected'
+                _context.SaveChanges();  // Save changes to the database
+            }
+            return RedirectToAction("ApproveClaims");  // Redirect to the list of claims
+        }
     }
 }
-

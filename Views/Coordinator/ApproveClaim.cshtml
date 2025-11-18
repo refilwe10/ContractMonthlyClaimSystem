@@ -1,0 +1,40 @@
+﻿@model IEnumerable<ContractMonthlyClaimSystem.Models.Claim>
+
+<h2>Approve Claims</h2>
+
+<!-- Table to display the list of pending claims -->
+<table class="table">
+    <thead>
+        <tr>
+            <th>Lecturer Name</th>
+            <th>Hours Worked</th>
+            <th>Hourly Rate</th>
+            <th>Notes</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var claim in Model)
+        {
+            <tr>
+                <!-- Replace LecturerName with the correct property name from Claim model -->
+                <td>@claim.Lecturer</td>
+                <td>@claim.HoursWorked</td>
+                <td>@claim.HourlyRate</td>
+                <td>
+                 
+                    @*  *@
+                </td>
+                <td>@claim.Status</td>
+                <td>
+                    <!-- Approve and Reject buttons for each claim -->
+                    <a href="@Url.Action("Approve", "Coordinator", new { id = claim.ClaimId })"
+                       class="btn btn-success">Approve</a>
+                    <a href="@Url.Action("Reject", "Coordinator", new { id = claim.ClaimId })" class="btn btn-danger">Reject</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
