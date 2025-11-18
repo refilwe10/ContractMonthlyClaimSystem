@@ -12,9 +12,7 @@ public class LecturerController : Controller
 
     public IActionResult Index()
     {
-        // Fetch lecturers or perform other actions
         var lecturers = _context.Lecturers.ToList();
         return View(lecturers);
     }
 }
-
