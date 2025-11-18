@@ -1,0 +1,28 @@
+﻿@model IEnumerable<Claim>
+
+<h2>Admin Dashboard - Approve Claims</h2>
+
+<h3>Claims Pending Approval</h3>
+<table>
+    <tr>
+        <th>Claim ID</th>
+        <th>Lecturer</th>
+        <th>Hours Worked</th>
+        <th>Status</th>
+        <th>Action</th>
+    </tr>
+    @foreach (var claim in Model)
+    {
+        <tr>
+            <td>@claim.ClaimId</td>
+            <td>@claim.Lecturer.Name</td>
+            <td>@claim.HoursWorked</td>
+            <td>@claim.Status</td>
+            <td>
+                <a href="@Url.Action("ApproveClaim", "Coordinator", new { id = claim.ClaimId })">Approve</a>
+                <a href="@Url.Action("RejectClaim", "Coordinator", new { id = claim.ClaimId })">Reject</a>
+            </td>
+        </tr>
+    }
+</table>
+

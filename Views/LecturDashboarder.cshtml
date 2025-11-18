@@ -1,0 +1,30 @@
+﻿@model IEnumerable<Claim>
+
+<h2>Lecturer Dashboard</h2>
+<p>Submit your monthly claim.</p>
+
+<form method="post" action="@Url.Action("SubmitClaim", "Lecturer")">
+    <label>Hours Worked:</label>
+    <input type="number" name="HoursWorked" required />
+    <label>Hourly Rate:</label>
+    <input type="number" name="HourlyRate" required />
+    <input type="submit" value="Submit Claim" />
+</form>
+
+<h3>Existing Claims</h3>
+<table>
+    <tr>
+        <th>Claim ID</th>
+        <th>Hours Worked</th>
+        <th>Status</th>
+    </tr>
+    @foreach (var claim in Model)
+    {
+        <tr>
+            <td>@claim.ClaimId</td>
+            <td>@claim.HoursWorked</td>
+            <td>@claim.Status</td>
+        </tr>
+    }
+</table>
+
