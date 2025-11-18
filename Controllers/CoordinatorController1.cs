@@ -13,6 +13,7 @@ public class CoordinatorController : Controller
     public IActionResult Index()
     {
         // Fetch coordinators or perform other actions
+
         var coordinators = _context.ProgrammeCoordinators.ToList();
         return View(coordinators);
     }
