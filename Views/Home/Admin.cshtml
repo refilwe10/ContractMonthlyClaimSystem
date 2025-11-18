@@ -15,7 +15,7 @@
     {
         <tr>
             <td>@claim.ClaimId</td>
-            <td>@claim.Lecturer.Name</td>
+                <td>@(claim.Lecturer?.Name ?? "N/A")</td>
             <td>@claim.HoursWorked</td>
             <td>@claim.Status</td>
             <td>

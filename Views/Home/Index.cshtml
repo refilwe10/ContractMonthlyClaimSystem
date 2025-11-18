@@ -3,6 +3,37 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">Welcome to Contract Monthly Claim System</h1>
+    <p>Manage your claims, lecturers, and coordinators efficiently.</p>
+
+    <!-- Buttons that lead to specific views for Lecturers and Coordinators -->
+    <p>
+        <a class="btn btn-primary" href="@Url.Action("Index", "Lecturer")">View Lecturers</a>
+        <a class="btn btn-primary" href="@Url.Action("Index", "Coordinator")">View Coordinators</a>
+    </p>
+</div>
+
+<!-- About Section -->
+<div class="container">
+    <h2>About this Application</h2>
+    <p>This system allows lecturers to submit monthly claims, and coordinators to approve and manage them.</p>
+</div>
+
+<!-- Section for Dynamic Content (Recent Claims) -->
+<div class="container">
+    <h2>Recent Claims</h2>
+    <ul>
+        @{
+            var recentClaims = ViewData["RecentClaims"] as List<Claim>;
+            if (recentClaims != null)
+            {
+                foreach (var claim in recentClaims)
+                {
+                    <li>
+                        @claim.ToString()
+                    </li>
+                }
+            }
+        }
+    </ul>
 </div>

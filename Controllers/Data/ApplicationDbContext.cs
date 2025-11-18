@@ -1,5 +1,7 @@
 ﻿using ContractMonthlyClaimSystem.Models;
 using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
+
 
 namespace ContractMonthlyClaimSystem.Controllers.Data
 {
